@@ -35,7 +35,7 @@
   img { max-width: 100%; display: block; }
   a { color: inherit; }
   .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 18px; }
-  section { padding: 56px 0; scroll-margin-top: 60px; }
+  section { padding: 56px 0; scroll-margin-top: 100px; }
   .tag {
     display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .06em;
     text-transform: uppercase; color: var(--blue); background: var(--blue-soft);
@@ -64,10 +64,21 @@
     position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94);
     backdrop-filter: blur(8px); border-bottom: 1px solid var(--blue-line);
   }
-  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
-  .logo { font-weight: 800; color: var(--blue-dark); font-size: 17px; text-decoration: none; }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .logo { font-weight: 800; color: var(--blue-dark); font-size: 17px; text-decoration: none; height: 56px; display: flex; align-items: center; gap: .3em; }
   .logo span { color: var(--blue); }
   .topbar .btn { font-size: 14px; padding: 9px 16px; box-shadow: none; }
+  /* Menu: trên điện thoại là một hàng vuốt ngang bên dưới tên */
+  .menu {
+    order: 3; width: 100%; display: flex; gap: 6px; overflow-x: auto; padding: 0 0 10px;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .menu::-webkit-scrollbar { display: none; }
+  .menu a {
+    flex-shrink: 0; text-decoration: none; font-size: 14px; font-weight: 600; color: var(--blue-dark);
+    padding: 6px 12px; border-radius: 999px; background: var(--blue-soft); transition: background .15s, color .15s;
+  }
+  .menu a:hover, .menu a.active { background: var(--blue); color: var(--white); }
 
   /* Phần đầu */
   .hero {
@@ -246,7 +257,11 @@
     .hero-actions { flex-direction: row; align-items: center; flex-wrap: wrap; }
   }
   @media (min-width: 900px) {
-    section { padding: 80px 0; }
+    section { padding: 80px 0; scroll-margin-top: 70px; }
+    .topbar .wrap { flex-wrap: nowrap; gap: 20px; }
+    .logo { height: 64px; flex-shrink: 0; }
+    .menu { order: 0; width: auto; padding: 0; overflow: visible; gap: 4px; }
+    .menu a { background: none; font-size: 15px; padding: 8px 12px; }
     h2 { font-size: 34px; }
     .hero { padding-top: 40px; }
     .hero-grid { grid-template-columns: 1.1fr .9fr; align-items: end; }
@@ -272,6 +287,14 @@
 <header class="topbar">
   <div class="wrap">
     <a class="logo" href="#">Toán thầy <span>Cao Tiến</span></a>
+    <nav class="menu" aria-label="Các mục chính">
+      <a href="#ve-thay">Về thầy</a>
+      <a href="#thanh-tich">Thành tích</a>
+      <a href="#lop-hoc">Lớp học</a>
+      <a href="#lich-hoc">Lịch học</a>
+      <a href="#feedback">Phản hồi</a>
+      <a href="#lien-he">Liên hệ</a>
+    </nav>
     <a class="btn" href="https://zalo.me/0965056687" target="_blank" rel="noopener">Đăng ký học thử</a>
   </div>
 </header>
@@ -480,6 +503,23 @@
   }
   addEventListener('scroll', chk, { passive: true });
   chk();
+
+  // Làm sáng mục menu ứng với phần đang xem
+  var links = document.querySelectorAll('.menu a');
+  function markMenu() {
+    var current = null;
+    links.forEach(function (a) {
+      var sec = document.querySelector(a.getAttribute('href'));
+      if (sec && sec.getBoundingClientRect().top <= 120) current = a;
+    });
+    links.forEach(function (a) { a.classList.toggle('active', a === current); });
+    var menu = document.querySelector('.menu');
+    if (current && innerWidth < 900) menu.scrollLeft = current.offsetLeft - (menu.clientWidth - current.offsetWidth) / 2;
+  }
+  // Chờ cuộn xong mới cập nhật menu, để không làm khựng hiệu ứng tự kéo xuống
+  var menuTimer;
+  addEventListener('scroll', function () { clearTimeout(menuTimer); menuTimer = setTimeout(markMenu, 150); }, { passive: true });
+  markMenu();
 </script>
 </body>
 </html>
