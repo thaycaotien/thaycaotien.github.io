@@ -197,15 +197,27 @@
   .schedule { background: var(--sky); }
   .sched-grid { display: grid; gap: 14px; }
   .sched {
-    background: var(--white); border-radius: var(--radius); padding: 18px; border-left: 6px solid var(--blue);
-    box-shadow: 0 6px 18px rgba(11,61,145,.07);
+    background: var(--white); border-radius: var(--radius); padding: 18px 14px 16px;
+    box-shadow: 0 6px 18px rgba(11,61,145,.07); border: 1px solid var(--blue-line);
   }
-  .sched h3 { font-size: 18px; color: var(--blue-dark); margin-bottom: 8px; }
-  .sched ul { list-style: none; display: grid; gap: 6px; }
-  .sched li { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 15px; }
-  .sched .day { font-weight: 700; }
-  .sched .time { color: var(--blue); font-weight: 600; }
-  .sched .cls { display: block; font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-top: 6px; }
+  .sched h3 { font-size: 18px; color: var(--blue-dark); margin-bottom: 12px; padding-left: 4px; }
+  .sched h3 small { font-weight: 600; color: var(--muted); font-size: 15px; }
+  /* Lưới 1 tuần: 7 ô từ Thứ 2 tới Chủ nhật */
+  .week { list-style: none; display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+  .week li {
+    border-radius: 10px; background: #f1f4f9; color: #a3adbd; text-align: center;
+    padding: 7px 2px 8px; min-height: 74px; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .week .d { font-size: 13px; font-weight: 700; }
+  .week li.on { background: var(--blue); color: var(--white); }
+  .week li.on .d { color: #d3e2ff; }
+  .week .t { font-size: 12px; font-weight: 700; line-height: 1.25; }
+  .online-card {
+    margin-top: 18px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start;
+    background: var(--white); border: 2px dashed var(--blue); border-radius: var(--radius); padding: 20px 18px;
+  }
+  .online-card h3 { font-size: 18px; color: var(--blue-dark); margin-bottom: 4px; }
+  .online-card p { color: var(--muted); font-size: 15px; }
 
   /* Feedback */
   .fb-track {
@@ -273,7 +285,8 @@
     .hero-photo .badge-float { left: 0; bottom: 36px; transform: none; font-size: 16px; }
     .about-grid { grid-template-columns: .8fr 1.2fr; }
     .classes-grid { grid-template-columns: 1fr 1fr 1fr; align-items: start; }
-    .sched-grid { grid-template-columns: repeat(4, 1fr); }
+    .sched-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+    .online-card { flex-direction: row; align-items: center; justify-content: space-between; }
     .fb-track { grid-auto-columns: calc((100% - 42px) / 4); }
     .contact-grid { grid-template-columns: 1fr 1fr; }
     .contact .btn { width: auto; }
@@ -416,34 +429,63 @@
   <div class="wrap">
     <span class="tag">Lịch học</span>
     <h2>Lịch học các khối</h2>
-    <p class="lead">Học trực tiếp tại trung tâm (Gò Dầu, Tân Phú).</p>
+    <p class="lead">Lịch học trực tiếp tại trung tâm (Gò Dầu, Tân Phú) theo từng ngày trong tuần. Ô màu xanh là buổi có lớp.</p>
     <div class="sched-grid">
       <div class="sched">
         <h3>Khối 10</h3>
-        <ul>
-          <li><span class="day">Thứ 3, Thứ 5</span><span class="time">17h30 – 20h30</span></li>
-          <li><span class="day">Chủ nhật</span><span class="time">15h – 17h</span></li>
+        <ul class="week">
+          <li><span class="d">T2</span></li>
+          <li class="on"><span class="d">T3</span><span class="t">17h30<br>20h30</span></li>
+          <li><span class="d">T4</span></li>
+          <li class="on"><span class="d">T5</span><span class="t">17h30<br>20h30</span></li>
+          <li><span class="d">T6</span></li>
+          <li><span class="d">T7</span></li>
+          <li class="on"><span class="d">CN</span><span class="t">15h<br>17h</span></li>
         </ul>
       </div>
       <div class="sched">
         <h3>Khối 11</h3>
-        <ul>
-          <li><span class="day">Thứ 2, 4, 6, Chủ nhật</span><span class="time">18h – 21h</span></li>
+        <ul class="week">
+          <li class="on"><span class="d">T2</span><span class="t">18h<br>21h</span></li>
+          <li><span class="d">T3</span></li>
+          <li class="on"><span class="d">T4</span><span class="t">18h<br>21h</span></li>
+          <li><span class="d">T5</span></li>
+          <li class="on"><span class="d">T6</span><span class="t">18h<br>21h</span></li>
+          <li><span class="d">T7</span></li>
+          <li class="on"><span class="d">CN</span><span class="t">18h<br>21h</span></li>
         </ul>
       </div>
       <div class="sched">
-        <h3>Khối 12 <small style="font-weight:600;color:var(--muted)">· Lớp 1</small></h3>
-        <ul>
-          <li><span class="day">Thứ 2, 4, 6</span><span class="time">18h – 21h</span></li>
+        <h3>Khối 12 <small>· Lớp 1</small></h3>
+        <ul class="week">
+          <li class="on"><span class="d">T2</span><span class="t">18h<br>21h</span></li>
+          <li><span class="d">T3</span></li>
+          <li class="on"><span class="d">T4</span><span class="t">18h<br>21h</span></li>
+          <li><span class="d">T5</span></li>
+          <li class="on"><span class="d">T6</span><span class="t">18h<br>21h</span></li>
+          <li><span class="d">T7</span></li>
+          <li><span class="d">CN</span></li>
         </ul>
       </div>
       <div class="sched">
-        <h3>Khối 12 <small style="font-weight:600;color:var(--muted)">· Lớp 2</small></h3>
-        <ul>
-          <li><span class="day">Thứ 3, Thứ 5</span><span class="time">18h – 21h</span></li>
-          <li><span class="day">Thứ 7</span><span class="time">13h – 16h</span></li>
+        <h3>Khối 12 <small>· Lớp 2</small></h3>
+        <ul class="week">
+          <li><span class="d">T2</span></li>
+          <li class="on"><span class="d">T3</span><span class="t">18h<br>21h</span></li>
+          <li><span class="d">T4</span></li>
+          <li class="on"><span class="d">T5</span><span class="t">18h<br>21h</span></li>
+          <li><span class="d">T6</span></li>
+          <li class="on"><span class="d">T7</span><span class="t">13h<br>16h</span></li>
+          <li><span class="d">CN</span></li>
         </ul>
       </div>
+    </div>
+    <div class="online-card">
+      <div>
+        <h3>Học online: kèm 1-1 hoặc theo nhóm</h3>
+        <p>Lịch học online được sắp xếp linh hoạt theo thời gian của học sinh. Vui lòng liên hệ trực tiếp qua Zalo để xếp lịch.</p>
+      </div>
+      <a class="btn btn-outline" href="https://zalo.me/0965056687" target="_blank" rel="noopener">Xếp lịch online qua Zalo</a>
     </div>
   </div>
 </section>
