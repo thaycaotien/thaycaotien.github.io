@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toán thầy Cao Tiến | Luyện thi Đại học, Toán 10 - 11 - 12</title>
+<meta name="description" content="Toán thầy Cao Tiến: luyện thi Đại học, ĐGNL và Toán cấp 3 tại Gò Dầu, Tân Phú. Học thử 2 buổi miễn phí.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1565e0;
+    --blue-dark: #0b3d91;
+    --blue-soft: #e8f1ff;
+    --blue-line: #cfe0fb;
+    --sky: #f5f9ff;
+    --text: #13213a;
+    --muted: #4f5d75;
+    --white: #ffffff;
+    --yellow: #ffc83d;
+    --green: #12a150;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 18px; }
+  section { padding: 56px 0; scroll-margin-top: 60px; }
+  .tag {
+    display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--blue); background: var(--blue-soft);
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 12px;
+  }
+  h2 { font-size: 26px; line-height: 1.3; font-weight: 800; color: var(--blue-dark); margin-bottom: 10px; }
+  .lead { color: var(--muted); margin-bottom: 28px; }
+
+  /* Nút */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--blue); color: var(--white); text-decoration: none;
+    font-weight: 700; font-size: 17px; padding: 15px 24px; border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(21,101,224,.3); transition: transform .15s, background .15s;
+    text-align: center;
+  }
+  .btn:hover { background: var(--blue-dark); transform: translateY(-2px); }
+  .btn-outline {
+    background: var(--white); color: var(--blue); border: 2px solid var(--blue); box-shadow: none;
+  }
+  .btn-outline:hover { background: var(--blue-soft); }
+  .btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+  /* Thanh trên */
+  .topbar {
+    position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--blue-line);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .logo { font-weight: 800; color: var(--blue-dark); font-size: 17px; text-decoration: none; }
+  .logo span { color: var(--blue); }
+  .topbar .btn { font-size: 14px; padding: 9px 16px; box-shadow: none; }
+
+  /* Phần đầu */
+  .hero {
+    position: relative; overflow: hidden; padding: 36px 0 0;
+    background: linear-gradient(170deg, #eaf3ff 0%, #d6e8ff 55%, #b9d6ff 100%);
+  }
+  .hero .formula {
+    position: absolute; color: rgba(11,61,145,.13); font-weight: 600; font-style: italic;
+    pointer-events: none; white-space: nowrap; user-select: none;
+  }
+  .hero-grid { position: relative; display: grid; gap: 8px; }
+  .hero-text { position: relative; z-index: 2; }
+  .hero .hello { font-weight: 600; color: var(--blue); font-size: 17px; }
+  .hero h1 {
+    font-size: 40px; line-height: 1.12; font-weight: 800; color: var(--blue-dark); margin: 6px 0 14px;
+  }
+  .hero h1 span { color: var(--blue); display: block; }
+  .hero .intro { font-size: 17px; color: #2c3b57; margin-bottom: 22px; max-width: 520px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .chip {
+    background: var(--white); border: 1px solid var(--blue-line); color: var(--blue-dark);
+    font-weight: 600; font-size: 14px; padding: 7px 13px; border-radius: 999px;
+  }
+  .hero-actions { display: flex; flex-direction: column; gap: 12px; }
+  .hero-actions .note { font-size: 14px; color: var(--muted); }
+  .hero { padding-bottom: 44px; }
+  .hero-photo { position: relative; z-index: 1; display: flex; justify-content: center; order: -1; margin-bottom: 18px; }
+  .hero-photo .frame {
+    position: relative; width: 230px; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+    border: 6px solid var(--white); box-shadow: 0 14px 34px rgba(11,61,145,.25); background: #eef2f7;
+  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 8%; }
+  .hero-photo .badge-float {
+    position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); white-space: nowrap;
+    background: var(--yellow); color: #3d2c00; font-weight: 800; font-size: 14px;
+    padding: 7px 14px; border-radius: 999px; box-shadow: 0 6px 16px rgba(0,0,0,.15);
+  }
+
+  /* Con số */
+  .stats { background: var(--blue-dark); color: var(--white); padding: 34px 0; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 12px; text-align: center; }
+  .stat b { display: block; font-size: 32px; font-weight: 800; color: var(--yellow); line-height: 1.15; }
+  .stat span { font-size: 14px; color: #d3e2ff; }
+
+  /* Về thầy */
+  .about-grid { display: grid; gap: 28px; align-items: center; }
+  .about-photo {
+    background: linear-gradient(160deg, var(--blue-soft), #ffffff); border-radius: 24px;
+    overflow: hidden; max-width: 380px; margin: 0 auto; width: 100%;
+  }
+  .creds { list-style: none; display: grid; gap: 14px; }
+  .creds li {
+    display: flex; gap: 14px; align-items: flex-start; background: var(--sky);
+    border: 1px solid var(--blue-line); border-radius: var(--radius); padding: 16px;
+  }
+  .creds .ico {
+    flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; background: var(--blue);
+    color: var(--white); display: grid; place-items: center; font-size: 22px;
+  }
+  .creds b { color: var(--blue-dark); display: block; }
+  .creds small { color: var(--muted); font-size: 15px; }
+  .quote-box {
+    margin-top: 18px; background: var(--blue); color: var(--white); border-radius: var(--radius);
+    padding: 18px 20px; font-weight: 500;
+  }
+
+  /* Thành tích học sinh */
+  .honor { background: var(--sky); }
+  .honor-list { display: grid; gap: 22px; }
+  .honor-item {
+    background: var(--white); border-radius: var(--radius); overflow: hidden;
+    box-shadow: 0 10px 28px rgba(11,61,145,.12);
+  }
+  .honor-item a { display: block; }
+  .honor-item img { width: 100%; }
+  .honor-item p { padding: 12px 16px; font-weight: 600; color: var(--blue-dark); font-size: 15px; }
+  .hint { font-size: 14px; color: var(--muted); margin-top: 14px; text-align: center; }
+
+  /* Lớp học */
+  .classes-grid { display: grid; gap: 18px; }
+  .class-card {
+    border: 1px solid var(--blue-line); border-radius: var(--radius); padding: 22px 18px;
+    background: var(--white); position: relative;
+  }
+  .class-card.featured { border: 2px solid var(--blue); box-shadow: 0 12px 30px rgba(21,101,224,.15); }
+  .badge {
+    position: absolute; top: -13px; left: 18px; background: var(--yellow); color: #4a3500;
+    font-size: 13px; font-weight: 800; padding: 4px 12px; border-radius: 999px;
+  }
+  .class-card h3 { font-size: 21px; color: var(--blue-dark); margin-bottom: 4px; }
+  .class-card .sub { color: var(--muted); font-size: 15px; margin-bottom: 14px; }
+  .price { font-size: 26px; font-weight: 800; color: var(--blue); }
+  .price small { font-size: 15px; font-weight: 500; color: var(--muted); }
+  .combo { list-style: none; margin-top: 14px; border-top: 1px dashed var(--blue-line); }
+  .combo li {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    padding: 10px 0; border-bottom: 1px dashed var(--blue-line); font-size: 15px;
+  }
+  .combo .off {
+    background: #e3f7ec; color: var(--green); font-weight: 700; font-size: 13px;
+    padding: 2px 8px; border-radius: 999px; margin-left: 6px; white-space: nowrap;
+  }
+  .combo strong { white-space: nowrap; }
+  .class-card .contact-note { margin-top: 12px; font-size: 15px; color: var(--muted); }
+  .refund {
+    margin-top: 22px; background: #fff8e6; border: 1px solid #ffe2a1; border-radius: var(--radius);
+    padding: 20px 18px;
+  }
+  .refund h3 { font-size: 18px; color: #7a5300; margin-bottom: 8px; }
+  .refund p { font-size: 15px; color: #5b4a22; }
+  .refund .ex {
+    margin-top: 10px; background: var(--white); border-radius: 12px; padding: 12px 14px; font-size: 15px;
+  }
+
+  /* Lịch học */
+  .schedule { background: var(--sky); }
+  .sched-grid { display: grid; gap: 14px; }
+  .sched {
+    background: var(--white); border-radius: var(--radius); padding: 18px; border-left: 6px solid var(--blue);
+    box-shadow: 0 6px 18px rgba(11,61,145,.07);
+  }
+  .sched h3 { font-size: 18px; color: var(--blue-dark); margin-bottom: 8px; }
+  .sched ul { list-style: none; display: grid; gap: 6px; }
+  .sched li { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 15px; }
+  .sched .day { font-weight: 700; }
+  .sched .time { color: var(--blue); font-weight: 600; }
+  .sched .cls { display: block; font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-top: 6px; }
+
+  /* Feedback */
+  .fb-track {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 14px;
+    overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .fb-track a {
+    scroll-snap-align: start; display: block; background: #dfe7f3; border-radius: var(--radius);
+    overflow: hidden; border: 1px solid var(--blue-line);
+  }
+  .fb-track img { width: 100%; height: 440px; object-fit: contain; background: #dfe7f3; }
+
+  /* Liên hệ */
+  .contact { background: linear-gradient(160deg, var(--blue-dark), var(--blue)); color: var(--white); }
+  .contact h2 { color: var(--white); }
+  .contact .lead { color: #d3e2ff; }
+  .contact-grid { display: grid; gap: 26px; align-items: center; }
+  .qr-card {
+    background: var(--white); border-radius: 22px; padding: 14px; max-width: 300px; width: 100%;
+    margin: 0 auto; box-shadow: 0 16px 40px rgba(0,0,0,.25);
+  }
+  .qr-card img { border-radius: 14px; }
+  .contact-list { list-style: none; display: grid; gap: 14px; margin-bottom: 24px; }
+  .contact-list li { display: flex; gap: 12px; align-items: center; font-size: 17px; }
+  .contact-list .ico {
+    width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.15);
+    display: grid; place-items: center; flex-shrink: 0; font-size: 20px;
+  }
+  .contact-list a { text-decoration: none; font-weight: 700; }
+  .contact .btn { background: var(--yellow); color: #3d2c00; box-shadow: 0 8px 22px rgba(0,0,0,.2); width: 100%; }
+  .contact .btn:hover { background: #ffd666; }
+
+  footer { background: #071f4d; color: #9fb6e0; text-align: center; font-size: 14px; padding: 22px 0 90px; }
+
+  /* Nút Zalo nổi trên điện thoại */
+  .float-zalo {
+    position: fixed; left: 50%; bottom: 14px; z-index: 30; transform: translate(-50%, 160%);
+    font-size: 15px; padding: 12px 22px; white-space: nowrap; transition: transform .3s;
+    box-shadow: 0 10px 26px rgba(11,61,145,.4);
+  }
+  .float-zalo.show, .float-zalo.show:hover { transform: translate(-50%, 0); }
+
+  /* Máy tính bảng / máy tính */
+  @media (min-width: 640px) {
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+    .fb-track { grid-auto-columns: 40%; }
+    .sched-grid { grid-template-columns: 1fr 1fr; }
+    .hero-actions { flex-direction: row; align-items: center; flex-wrap: wrap; }
+  }
+  @media (min-width: 900px) {
+    section { padding: 80px 0; }
+    h2 { font-size: 34px; }
+    .hero { padding-top: 40px; }
+    .hero-grid { grid-template-columns: 1.1fr .9fr; align-items: end; }
+    .hero { padding-bottom: 70px; }
+    .hero-grid { align-items: center; }
+    .hero h1 { font-size: 56px; }
+    .hero-photo { order: 0; margin: 0; }
+    .hero-photo .frame { width: 100%; max-width: 400px; aspect-ratio: 4 / 5; border-radius: 32px; }
+    .hero-photo .badge-float { left: 0; bottom: 36px; transform: none; font-size: 16px; }
+    .about-grid { grid-template-columns: .8fr 1.2fr; }
+    .classes-grid { grid-template-columns: 1fr 1fr 1fr; align-items: start; }
+    .sched-grid { grid-template-columns: repeat(4, 1fr); }
+    .fb-track { grid-auto-columns: calc((100% - 42px) / 4); }
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+    .contact .btn { width: auto; }
+    .float-zalo { display: none; }
+    footer { padding-bottom: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="#">Toán thầy <span>Cao Tiến</span></a>
+    <a class="btn" href="https://zalo.me/0965056687" target="_blank" rel="noopener">Đăng ký học thử</a>
+  </div>
+</header>
+
+<!-- PHẦN ĐẦU -->
+<section class="hero">
+  <span class="formula" style="top:6%;right:6%;font-size:22px">y = ax² + bx + c</span>
+  <span class="formula" style="top:30%;right:2%;font-size:20px">a² + b² = c²</span>
+  <span class="formula" style="top:52%;left:58%;font-size:18px">x = (−b ± √Δ) / 2a</span>
+  <span class="formula" style="bottom:12%;left:3%;font-size:20px">∫ f(x) dx</span>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <p class="hello">Giáo viên Toán THPT · Luyện thi Đại học</p>
+      <h1>Thầy <span>Cao Tiến</span></h1>
+      <p class="intro">Chuyên <b>luyện thi Đại học</b>, <b>Đánh giá năng lực</b> và giảng dạy <b>Toán lớp 10, 11, 12</b>. Hơn 6 năm kinh nghiệm, đã đồng hành cùng hơn 200 học viên.</p>
+      <div class="chips">
+        <span class="chip">Luyện thi ĐH &amp; ĐGNL</span>
+        <span class="chip">Toán 10 · 11 · 12</span>
+        <span class="chip">Kèm 1-1</span>
+        <span class="chip">Học trực tiếp &amp; online</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn" href="https://zalo.me/0965056687" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 5.9 2 10.7c0 2.7 1.4 5.1 3.6 6.7L5 21.5l4.2-2.2c.9.2 1.8.3 2.8.3 5.5 0 10-3.9 10-8.8S17.5 2 12 2z"/></svg>
+          Kết bạn Zalo – Học thử 2 buổi miễn phí
+        </a>
+        <span class="note">Liên hệ qua Zalo để được tư vấn và xếp lớp học thử.</span>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="frame"><img src="anh/thay-dung-khoanh-tay.jpg" alt="Thầy Cao Tiến mặc áo sơ mi trắng, khoanh tay, mỉm cười"></div>
+      <span class="badge-float">🎯 27.55 điểm khối A00</span>
+    </div>
+  </div>
+</section>
+
+<!-- CON SỐ -->
+<div class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat"><b>6+</b><span>năm dạy Toán</span></div>
+    <div class="stat"><b>200+</b><span>học viên</span></div>
+    <div class="stat"><b>7.000+</b><span>giờ đứng lớp</span></div>
+    <div class="stat"><b>1052</b><span>điểm ĐGNL cao nhất lớp</span></div>
+  </div>
+</div>
+
+<!-- VỀ THẦY -->
+<section id="ve-thay">
+  <div class="wrap about-grid">
+    <div class="about-photo">
+      <img src="anh/thay-cam-laptop.jpg" alt="Thầy Cao Tiến cầm laptop, giơ ngón cái" loading="lazy">
+    </div>
+    <div>
+      <span class="tag">Về thầy</span>
+      <h2>Giới thiệu giáo viên</h2>
+      <p class="lead">Thầy Cao Tiến có hơn 6 năm kinh nghiệm giảng dạy Toán, hiện quản lý trung tâm tại Gò Dầu, Tân Phú, giảng dạy trực tiếp và trực tuyến.</p>
+      <ul class="creds">
+        <li><span class="ico">🎯</span><div><b>27.55 điểm khối A00 năm 2024</b><small>Tổng 3 môn Toán – Lý – Hoá, thi tốt nghiệp THPT</small></div></li>
+        <li><span class="ico">🎓</span><div><b>Trường ĐH Sư Phạm TP.HCM</b></div></li>
+        <li><span class="ico">📊</span><div><b>Cựu sinh viên ĐH Kinh Tế TP.HCM (UEH)</b></div></li>
+        <li><span class="ico">🏅</span><div><b>Giải Khuyến Khích Máy Tính Cầm Tay cấp Thành phố</b></div></li>
+      </ul>
+      <p class="quote-box">Hàng trăm học viên đã trúng tuyển ĐH Y Dược, UEH, Bách khoa...</p>
+    </div>
+  </div>
+</section>
+
+<!-- THÀNH TÍCH HỌC SINH -->
+<section class="honor" id="thanh-tich">
+  <div class="wrap">
+    <span class="tag">Thành tích học sinh</span>
+    <h2>Thành tích học sinh</h2>
+    <p class="lead">Học sinh đạt điểm cao trong kỳ thi tốt nghiệp THPT 2025 và kỳ thi Đánh giá năng lực khoá 2K7.</p>
+    <div class="honor-list">
+      <figure class="honor-item">
+        <a href="anh/vinh-danh-thpt-2025.jpg" target="_blank" rel="noopener">
+          <img src="anh/vinh-danh-thpt-2025.jpg" alt="Vinh danh học sinh đạt điểm cao môn Toán THPT Quốc gia 2025 lớp thầy Cao Tiến" loading="lazy">
+        </a>
+        <p>Điểm cao môn Toán – Kỳ thi THPT 2025</p>
+      </figure>
+      <figure class="honor-item">
+        <a href="anh/vinh-danh-dgnl-2k7.jpg" target="_blank" rel="noopener">
+          <img src="anh/vinh-danh-dgnl-2k7.jpg" alt="Vinh danh top học sinh điểm cao lớp ĐGNL thầy Cao Tiến khoá 2K7" loading="lazy">
+        </a>
+        <p>Đánh giá năng lực (ĐGNL) – Khoá 2K7</p>
+      </figure>
+    </div>
+    <p class="hint">Bấm vào ảnh để xem to hơn</p>
+  </div>
+</section>
+
+<!-- CÁC LỚP & HỌC PHÍ -->
+<section id="lop-hoc">
+  <div class="wrap">
+    <span class="tag">Các lớp học</span>
+    <h2>Hình thức lớp học</h2>
+    <p class="lead">Vui lòng liên hệ qua Zalo để được tư vấn lớp học và học phí phù hợp.</p>
+    <div class="classes-grid">
+      <div class="class-card featured">
+        <span class="badge">⭐ Lớp nhỏ</span>
+        <h3>Lớp VIP</h3>
+        <p class="sub">5 – 10 học sinh/lớp, giáo viên theo sát từng học sinh</p>
+      </div>
+      <div class="class-card">
+        <h3>Lớp kèm tại trung tâm</h3>
+        <p class="sub">Kèm riêng tại trung tâm</p>
+      </div>
+      <div class="class-card">
+        <h3>Học online</h3>
+        <p class="sub">Kèm 1-1 hoặc theo nhóm</p>
+      </div>
+    </div>
+    <p style="margin-top:22px;text-align:center"><a class="btn btn-outline" href="https://zalo.me/0965056687" target="_blank" rel="noopener">Tư vấn qua Zalo</a></p>
+  </div>
+</section>
+
+<!-- LỊCH HỌC -->
+<section class="schedule" id="lich-hoc">
+  <div class="wrap">
+    <span class="tag">Lịch học</span>
+    <h2>Lịch học các khối</h2>
+    <p class="lead">Học trực tiếp tại trung tâm (Gò Dầu, Tân Phú).</p>
+    <div class="sched-grid">
+      <div class="sched">
+        <h3>Khối 10</h3>
+        <ul>
+          <li><span class="day">Thứ 3, Thứ 5</span><span class="time">17h30 – 20h30</span></li>
+          <li><span class="day">Chủ nhật</span><span class="time">15h – 17h</span></li>
+        </ul>
+      </div>
+      <div class="sched">
+        <h3>Khối 11</h3>
+        <ul>
+          <li><span class="day">Thứ 2, 4, 6, Chủ nhật</span><span class="time">18h – 21h</span></li>
+        </ul>
+      </div>
+      <div class="sched">
+        <h3>Khối 12 <small style="font-weight:600;color:var(--muted)">· Lớp 1</small></h3>
+        <ul>
+          <li><span class="day">Thứ 2, 4, 6</span><span class="time">18h – 21h</span></li>
+        </ul>
+      </div>
+      <div class="sched">
+        <h3>Khối 12 <small style="font-weight:600;color:var(--muted)">· Lớp 2</small></h3>
+        <ul>
+          <li><span class="day">Thứ 3, Thứ 5</span><span class="time">18h – 21h</span></li>
+          <li><span class="day">Thứ 7</span><span class="time">13h – 16h</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK -->
+<section id="feedback">
+  <div class="wrap">
+    <span class="tag">Feedback</span>
+    <h2>Phản hồi từ phụ huynh và học sinh</h2>
+    <p class="lead">Tin nhắn thực tế phụ huynh và học sinh gửi thầy. Vuốt ngang để xem thêm, bấm vào ảnh để xem kích thước lớn.</p>
+    <div class="fb-track">
+      <a href="anh/feedback-1.jpg" target="_blank" rel="noopener"><img src="anh/feedback-1.jpg" alt="Tin nhắn phụ huynh: con đi học về vui vẻ" loading="lazy"></a>
+      <a href="anh/feedback-4.jpg" target="_blank" rel="noopener"><img src="anh/feedback-4.jpg" alt="Tin nhắn học sinh báo được 9 điểm Toán" loading="lazy"></a>
+      <a href="anh/feedback-5.jpg" target="_blank" rel="noopener"><img src="anh/feedback-5.jpg" alt="Tin nhắn phụ huynh báo con đậu Bách Khoa" loading="lazy"></a>
+      <a href="anh/feedback-7.jpg" target="_blank" rel="noopener"><img src="anh/feedback-7.jpg" alt="Tin nhắn phụ huynh báo điểm ĐGNL 905" loading="lazy"></a>
+      <a href="anh/feedback-6.jpg" target="_blank" rel="noopener"><img src="anh/feedback-6.jpg" alt="Lời cảm ơn của học sinh cũ gửi thầy" loading="lazy"></a>
+      <a href="anh/feedback-3.jpg" target="_blank" rel="noopener"><img src="anh/feedback-3.jpg" alt="Tin nhắn phụ huynh cảm ơn thầy, điểm ĐGNL 863" loading="lazy"></a>
+      <a href="anh/feedback-2.jpg" target="_blank" rel="noopener"><img src="anh/feedback-2.jpg" alt="Tin nhắn phụ huynh: con hiểu bài" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
+<!-- LIÊN HỆ -->
+<section class="contact" id="lien-he">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Đăng ký học thử 2 buổi miễn phí</h2>
+      <p class="lead">Quý phụ huynh và học sinh vui lòng quét mã QR hoặc bấm nút bên dưới để kết bạn Zalo. Thầy sẽ tư vấn lộ trình và xếp lớp học thử phù hợp.</p>
+      <ul class="contact-list">
+        <li><span class="ico">📞</span><a href="tel:0965056687">096 505 6687</a></li>
+        <li><span class="ico">💬</span><span>Zalo: <b>Cao Tiến</b> (096 505 6687)</span></li>
+        <li><span class="ico">📍</span><span>Gò Dầu, Tân Phú, TP.HCM</span></li>
+      </ul>
+      <a class="btn" href="https://zalo.me/0965056687" target="_blank" rel="noopener">Kết bạn Zalo để đăng ký</a>
+    </div>
+    <div class="qr-card">
+      <img src="zalo-qr.webp" alt="Mã QR Zalo của thầy Cao Tiến" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© Toán thầy Cao Tiến · Luyện thi Đại học &amp; Toán 10 – 11 – 12</div>
+</footer>
+
+<a class="btn float-zalo" href="https://zalo.me/0965056687" target="_blank" rel="noopener">Đăng ký học thử qua Zalo</a>
+
+<script>
+  // Hiện nút Zalo nổi khi đã cuộn qua phần đầu, ẩn khi tới phần liên hệ
+  var fz = document.querySelector('.float-zalo');
+  var hero = document.querySelector('.hero');
+  var ct = document.getElementById('lien-he');
+  function chk() {
+    var past = window.scrollY > hero.offsetHeight - 80;
+    var atContact = window.scrollY + innerHeight > ct.offsetTop;
+    fz.classList.toggle('show', past && !atContact);
+  }
+  addEventListener('scroll', chk, { passive: true });
+  chk();
+</script>
+</body>
+</html>
